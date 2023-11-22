@@ -23,7 +23,7 @@ This is the About Page, nothing is here but you may logout<br>
 
   if(isset($_SESSION["username"])){
 
-    echo $_SESSION["username"];
+    echo $_SESSION["username"] . <"br">;
   }
   else{
     echo "If you want your username to be displayed Go back to Home page and register<br>";
