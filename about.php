@@ -18,7 +18,7 @@ This is the About Page, nothing is here but you may logout<br>
     
 </body>
 </html>
-<?php //this php code prints username if true and ends session if logout buttion is clicked
+<?php //This PHP code is designed to display the username if the condition is true, and it terminates the session when the logout button is clicked.
     echo"WELCOME <br>";
 
   if(isset($_SESSION["username"])){
