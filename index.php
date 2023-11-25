@@ -1,7 +1,7 @@
 <?php 
- include("header.html");//this is the simple reference to raw html files
- include("database.php");//including connection to my SQL database
- session_start();//trying to make a session
+ include("header.html");//This is a straightforward reference to raw HTML file
+ include("database.php");//This includes establishing a connection to my SQL database
+ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,9 +28,9 @@
 
 
 <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST"){//this is a simple but works every time, cheking with a global variable Server if my method is POST and not GET(by default)
-        $username = filter_input(INPUT_POST,"username",FILTER_SANITIZE_SPECIAL_CHARS);// so I'm taking user input from html form to FILTER users' username so it's more sequire
-        $password = $_POST["password"];//I tend to not filtering the password since i'm gonna hash it anyway
+    if($_SERVER["REQUEST_METHOD"] == "POST"){//This is a simple yet reliable approach that checks the global variable 'Server' to ensure that the method is POST and not the default GET.
+        $username = filter_input(INPUT_POST,"username",FILTER_SANITIZE_SPECIAL_CHARS);// retrieving user input from an HTML form to filter and enhance the security of users
+        $password = $_POST["password"];//I choose not to filter the password input since I intend to hash it before storage
         if(empty($username) ){
             echo "Username is missing";
         }
@@ -38,13 +38,13 @@
             echo "Password is missing";
         }
         else{
-            $hash = password_hash($password, PASSWORD_DEFAULT);//so i'm storing a hashed password
+            $hash = password_hash($password, PASSWORD_DEFAULT);//As I mentioned above
             $sql = "INSERT INTO users (user, passwords)
-                    VALUES('$username', '$hash')";//so this is the first usage of raw SQL CODE connected to DB named businessdb and table "users". i'm inserting user input of username and hashed password
-            
-            try{//the whole try method is just a way to handle dublicates in username since i set it up to be unique
-                mysqli_query($conn,$sql);// values $sql with SQL code to insert info passing through referensed $conn createed in database.php with query function 
-                echo "You are In";// if success - welcome to the database
+                    VALUES('$username', '$hash')";//This marks the initial utilization of raw SQL code connected to the 'businessdb' database and the 'users' table. 
+                    //Inserting user input of username and hashed password
+            try{//This entire block of 'try' method serves as a mechanism to handle duplicates in usernames(set as UNIQUE in db)
+                mysqli_query($conn,$sql);//This holds the SQL code for inserting information, utilizing the referenced '$conn' created in 'database.php' through the 'query' function.
+                echo "You are In";// If successful - welcome to the database
             }
             catch(mysqli_sql_exception){
                 echo "Username is taken";
